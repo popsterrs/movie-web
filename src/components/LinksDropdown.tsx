@@ -136,6 +136,10 @@ export function LinksDropdown(props: { children: React.ReactNode }) {
             </DropdownLink>
           )}
           <Divider />
+          <DropdownLink href="/discover" icon={Icons.ARROWTRENDUP}>
+            {t("navigation.menu.discover")}
+          </DropdownLink>
+          <Divider />
           <DropdownLink href="/settings" icon={Icons.SETTINGS}>
             {t("navigation.menu.settings")}
           </DropdownLink>

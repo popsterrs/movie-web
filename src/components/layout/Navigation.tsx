@@ -12,6 +12,7 @@ import { conf } from "@/setup/config";
 import { useBannerSize } from "@/stores/banner";
 
 import { BrandPill } from "./BrandPill";
+import { TextPill } from "./TextPill";
 
 export interface NavigationProps {
   bg?: boolean;
@@ -103,6 +104,7 @@ export function Navigation(props: NavigationProps) {
                 <IconPatch icon={Icons.GITHUB} clickable downsized />
               </a>
             </div>
+
             <div className="relative pointer-events-auto">
               <LinksDropdown>
                 {loggedIn ? <UserAvatar withName /> : <NoUserAvatar />}
@@ -111,6 +113,7 @@ export function Navigation(props: NavigationProps) {
           </div>
         </div>
       </div>
+
     </>
   );
 }
