@@ -16,7 +16,8 @@ function useSearch(search: string) {
   const [searching, setSearching] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const debouncedSearch = useDebounce<string>(search, 500);
+  // 500ms is the default debounceSearch time
+  const debouncedSearch = useDebounce<string>(search, 250);
   useEffect(() => {
     setSearching(search !== "");
     setLoading(search !== "");
