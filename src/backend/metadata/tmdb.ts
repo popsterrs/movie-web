@@ -177,11 +177,14 @@ export function decodeTMDBId(
     return results;
   }
 
-export async function getTrending(): Promise<(TMDBMovieSearchResult | TMDBShowSearchResult)[]> {
+export async function getTrending(
+  page: number,
+): Promise<(TMDBMovieSearchResult | TMDBShowSearchResult)[]> {
   // await new Promise(resolve => setTimeout(resolve, 2000));
 
   const data = await get<TMDBSearchResult>("trending/all/day", {
     language: 'en-US',
+    page: 1,
   });
 
   const results = data.results.filter(

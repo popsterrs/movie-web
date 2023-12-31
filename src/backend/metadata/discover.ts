@@ -15,7 +15,7 @@ cache.setCompare((a, b) => {
 cache.initialize();
 
 export async function getTrendingMedia(): Promise<MediaItem[]> {
-  const data = await getTrending();
+  const data = await getTrending(1);
   const results = data.map((v) => {
     const formattedResult = formatTMDBSearchResult(v, v.media_type);
     return formatTMDBMetaToMediaItem(formattedResult);
