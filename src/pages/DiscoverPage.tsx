@@ -16,7 +16,6 @@ import {
 } from "@/backend/metadata/types/tmdb";
 import { MediaItem } from "@/utils/mediaTypes";
 
-
 interface TrendingViewProps {
   state: {
     loading: boolean;
@@ -33,10 +32,10 @@ function TrendingView({ state, trendingData }: TrendingViewProps) {
         {/* <p>{JSON.stringify(trendingData)}</p> */}
 
         <MediaGrid>
-            {trendingData.map((v) => (
-              <WatchedMediaCard key={v.id.toString()} media={v} />
-            ))}
-          </MediaGrid>
+          {trendingData.map((v) => (
+            <WatchedMediaCard key={v.id.toString()} media={v} />
+          ))}
+        </MediaGrid>
       </div>
     );
   }
@@ -73,7 +72,7 @@ export function DiscoverPage() {
         <Title>{t("discover.title")}</Title>
 
         <TrendingView state={state} trendingData={trendingResults} />
-        
+
       </WideContainer>
     </SubPageLayout>
   );
