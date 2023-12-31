@@ -135,6 +135,10 @@
       }
     }
   },
+  "discover": {
+    "title": "Discover",
+    "loading": "Loading..."
+  },
   "media": {
     "episodeDisplay": "S{{season}} E{{episode}}",
     "types": {
