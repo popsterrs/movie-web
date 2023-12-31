@@ -177,6 +177,42 @@ export async function multiSearch(
   return results;
 }
 
+// export async function getTrending(): Promise<(TMDBMovieSearchResult | TMDBShowSearchResult)[]> {
+//   // make a request to the trending endpoint
+//   const data = await get<TMDBSearchResult>("trending/all/day", {
+//     language: "en-US",
+//     page: 1,
+//   });
+
+//   // filter the results to include only movies and TV shows
+//   const results = data.results.filter(
+//     (r) =>
+//       r.media_type === TMDBContentTypes.MOVIE ||
+//       r.media_type === TMDBContentTypes.TV,
+//   );
+
+//   return results;
+// }
+
+export async function getTrending() {
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5NTBkNTZlMDQxZmYzY2M3Njk2NTZiMWRjOWUyNjYwNiIsInN1YiI6IjY0MjliYmI2NjY1NDA4MDA5N2Y1ZjU2ZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.89b7RF2I-Dm0y_b2_2j6krUKFDgwN0jvn4RAbRy616w'
+    }
+  };
+
+  try {
+    const response = await fetch('https://api.themoviedb.org/3/trending/all/day?language=en-US', options);
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+}
+
 export async function generateQuickSearchMediaUrl(
   query: string,
 ): Promise<string | undefined> {

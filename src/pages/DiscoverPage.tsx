@@ -8,9 +8,30 @@ import { MediaGrid } from "@/components/media/MediaGrid";
 import { WatchedMediaCard } from "@/components/media/WatchedMediaCard";
 import { t } from "i18next";
 import { SubPageLayout } from "./layouts/SubPageLayout";
+import { getTrending } from "@/backend/metadata/tmdb";
+import {
+  TMDBMovieSearchResult,
+  TMDBShowSearchResult,
+} from "@/backend/metadata/types/tmdb";
+
 
 export function DiscoverPage() {
-  const [showBg, setShowBg] = useState<boolean>(true);
+  const [trendingData, setTrendingData] = useState(null);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getTrending();
+        setTrendingData(data);
+      } catch (err) {
+        setError(err);
+      }
+    };
+
+    fetchData();
+  }, []); // The empty dependency array ensures that the effect runs only once when the component mounts
+
 
   return (
     <SubPageLayout>
@@ -23,11 +44,11 @@ export function DiscoverPage() {
         <WideContainer>
           <Title>{t("discover.title")}</Title>
 
-          <p>
-            
-          </p>
-
           <DiscoverLoadingPart/>
+
+          <p>
+            {JSON.stringify(trendingData)}
+          </p>
           {/* <MediaGrid>
             {results.map((v) => (
               <WatchedMediaCard key={v.id.toString()} media={v} />
