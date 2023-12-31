@@ -39,10 +39,12 @@ function TrendingView({ state, trendingData, loadMore, hasMore }: TrendingViewPr
       </MediaGrid>
 
       <InfiniteScroll
-        pageStart={0}
+        pageStart={2}
         loadMore={loadMore}
         hasMore={hasMore}
-        loader={<div className="loader" key={0}>Loading ...</div>}
+        loader={
+          <DiscoverLoadingPart/>
+        }
       />
     </div>
     );
@@ -51,16 +53,18 @@ function TrendingView({ state, trendingData, loadMore, hasMore }: TrendingViewPr
 
 export function DiscoverPage() {
   const [trendingResults, setTrendingResults] = useState<MediaItem[]>([]);
-  const [state, exec] = useAsyncFn(() => getTrendingMedia());
+  const [state, exec] = useAsyncFn(() => getTrendingMedia(1));
   const [hasMore, setHasMore] = useState(true);
+  const [currentPageNumber, setCurrentPageNumber] = useState(1);
 
   const loadMore = async () => {
     try {
-      const additionalResults = await getTrendingMedia();
+      const additionalResults = await getTrendingMedia(currentPageNumber + 1);
       if (additionalResults && additionalResults.length > 0) {
         setTrendingResults((prevResults) => [...prevResults, ...additionalResults]);
+        setCurrentPageNumber((prevPageNumber) => prevPageNumber + 1);
       } else {
-        setHasMore(false);
+        setHasMore(false); 
       }
     } catch (error) {
       console.error(error);
@@ -94,7 +98,6 @@ export function DiscoverPage() {
         <Title>{t("discover.title")}</Title>
 
         <TrendingView state={state} trendingData={trendingResults} loadMore={loadMore} hasMore={hasMore} />
-
       </WideContainer>
     </SubPageLayout>
   );
