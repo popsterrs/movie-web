@@ -60,7 +60,7 @@ export function DiscoverPage() {
       if (additionalResults && additionalResults.length > 0) {
         setTrendingResults((prevResults) => [...prevResults, ...additionalResults]);
       } else {
-        setHasMore(false); // No more items to load
+        setHasMore(false);
       }
     } catch (error) {
       console.error(error);
