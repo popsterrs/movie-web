@@ -180,7 +180,7 @@ export function decodeTMDBId(
 export async function getTrending(
   pageNumber: number,
 ): Promise<(TMDBMovieSearchResult | TMDBShowSearchResult)[]> {
-  await new Promise(resolve => setTimeout(resolve, 1000));
+  // await new Promise(resolve => setTimeout(resolve, 3000)); //articially adding delay to test DiscoverLoadingPart
 
   const data = await get<TMDBSearchResult>("trending/all/day", {
     language: 'en-US',
@@ -212,7 +212,6 @@ export async function generateQuickSearchMediaUrl(
   )}`;
 }
 
-// Conditional type which for inferring the return type based on the content type
 type MediaDetailReturn<T extends TMDBContentTypes> =
   T extends TMDBContentTypes.MOVIE
     ? TMDBMovieData
