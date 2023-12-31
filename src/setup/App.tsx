@@ -15,6 +15,7 @@ import { useOnlineListener } from "@/hooks/usePing";
 import { AboutPage } from "@/pages/About";
 import { AdminPage } from "@/pages/admin/AdminPage";
 import VideoTesterView from "@/pages/developer/VideoTesterView";
+import { DiscoverPage } from "@/pages/DiscoverPage";
 import { DmcaPage, shouldHaveDmcaPage } from "@/pages/Dmca";
 import { NotFoundPage } from "@/pages/errors/NotFoundPage";
 import { HomePage } from "@/pages/HomePage";
@@ -136,6 +137,9 @@ function App() {
 
         {/* admin routes */}
         <Route path="/admin" element={<AdminPage />} />
+
+        {/* newpage routes */}
+        <Route path="/discover" element={<DiscoverPage />} />
 
         {/* other */}
         <Route path="/dev" element={<DeveloperPage />} />
