@@ -73,12 +73,7 @@ export function DiscoverPage() {
         <Title>{t("discover.title")}</Title>
 
         <TrendingView state={state} trendingData={trendingResults} />
-
-        {/* <MediaGrid>
-          {trendingResults.map((v) => (
-            <WatchedMediaCard key={v.id.toString()} media={v} />
-          ))}
-        </MediaGrid> */}
+        
       </WideContainer>
     </SubPageLayout>
   );
