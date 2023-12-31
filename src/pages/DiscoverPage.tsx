@@ -15,28 +15,36 @@ import {
   TMDBShowSearchResult,
 } from "@/backend/metadata/types/tmdb";
 import { MediaItem } from "@/utils/mediaTypes";
+import InfiniteScroll from "react-infinite-scroller";
 
 interface TrendingViewProps {
   state: {
     loading: boolean;
   };
-  trendingData: MediaItem[]; 
+  trendingData: MediaItem[];
+  loadMore: () => void;
+  hasMore: boolean;
 }
 
-function TrendingView({ state, trendingData }: TrendingViewProps) {
+function TrendingView({ state, trendingData, loadMore, hasMore }: TrendingViewProps) {
   if (state.loading) {
     return <DiscoverLoadingPart />;
   } else {
     return (
       <div className="mt-8">
-        {/* <p>{JSON.stringify(trendingData)}</p> */}
+      <MediaGrid>
+        {trendingData.map((v) => (
+          <WatchedMediaCard key={v.id.toString()} media={v} />
+        ))}
+      </MediaGrid>
 
-        <MediaGrid>
-          {trendingData.map((v) => (
-            <WatchedMediaCard key={v.id.toString()} media={v} />
-          ))}
-        </MediaGrid>
-      </div>
+      <InfiniteScroll
+        pageStart={0}
+        loadMore={loadMore}
+        hasMore={hasMore}
+        loader={<div className="loader" key={0}>Loading ...</div>}
+      />
+    </div>
     );
   }
 }
@@ -44,6 +52,20 @@ function TrendingView({ state, trendingData }: TrendingViewProps) {
 export function DiscoverPage() {
   const [trendingResults, setTrendingResults] = useState<MediaItem[]>([]);
   const [state, exec] = useAsyncFn(() => getTrendingMedia());
+  const [hasMore, setHasMore] = useState(true);
+
+  const loadMore = async () => {
+    try {
+      const additionalResults = await getTrendingMedia();
+      if (additionalResults && additionalResults.length > 0) {
+        setTrendingResults((prevResults) => [...prevResults, ...additionalResults]);
+      } else {
+        setHasMore(false); // No more items to load
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     async function runSearch() {
@@ -71,7 +93,7 @@ export function DiscoverPage() {
       <WideContainer>
         <Title>{t("discover.title")}</Title>
 
-        <TrendingView state={state} trendingData={trendingResults} />
+        <TrendingView state={state} trendingData={trendingResults} loadMore={loadMore} hasMore={hasMore} />
 
       </WideContainer>
     </SubPageLayout>
