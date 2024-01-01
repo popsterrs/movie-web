@@ -28,6 +28,6 @@ package-lock.json
 
 # config
 .env
-# public/config.js
+public/config.js
 devEnvironment.env
 example.env
