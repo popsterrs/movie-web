@@ -9,7 +9,7 @@ export function TextPill(props: {
   backgroundClass?: string;
 }) {
   const { t } = useTranslation();
-// 
+
   return (
     <div
       className={classNames(
