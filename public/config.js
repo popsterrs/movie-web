@@ -1,10 +1,10 @@
 window.__CONFIG__ = {
     // The URL for the CORS proxy, the URL must NOT end with a slash!
-    // VITE_CORS_PROXY_URL: "https://cors-anywhere.herokuapp.com",
-    VITE_CORS_PROXY_URL: import.meta.env.VITE_CORS_PROXY_URL,
+    VITE_CORS_PROXY_URL: "https://simple-proxy.jackpadbury1.workers.dev",
+    // VITE_CORS_PROXY_URL: 
   
     // The READ API key to access TMDB
-    VITE_TMDB_READ_API_KEY: import.meta.env.VITE_TMDB_READ_API_KEY,
+    VITE_TMDB_READ_API_KEY: "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5NTBkNTZlMDQxZmYzY2M3Njk2NTZiMWRjOWUyNjYwNiIsInN1YiI6IjY0MjliYmI2NjY1NDA4MDA5N2Y1ZjU2ZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.89b7RF2I-Dm0y_b2_2j6krUKFDgwN0jvn4RAbRy616w",
   
     // The DMCA email displayed in the footer, null to hide the DMCA link
     VITE_DMCA_EMAIL: null,
