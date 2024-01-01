@@ -141,41 +141,41 @@ export function decodeTMDBId(
   };
 }
 
-  const baseURL = "https://api.themoviedb.org/3";
+const baseURL = "https://api.themoviedb.org/3";
 
-  const headers = {
-    accept: "application/json",
-    Authorization: `Bearer ${conf().TMDB_READ_API_KEY}`,
-  };
+const headers = {
+  accept: "application/json",
+  Authorization: `Bearer ${conf().TMDB_READ_API_KEY}`,
+};
 
-  async function get<T>(url: string, params?: object): Promise<T> {
-    const res = await mwFetch<any>(encodeURI(url), {
-      headers,
-      baseURL,
-      params: {
-        ...params,
-      },
-    });
-    return res;
-  }
+async function get<T>(url: string, params?: object): Promise<T> {
+  const res = await mwFetch<any>(encodeURI(url), {
+    headers,
+    baseURL,
+    params: {
+      ...params,
+    },
+  });
+  return res;
+}
 
-  export async function multiSearch(
-    query: string,
-  ): Promise<(TMDBMovieSearchResult | TMDBShowSearchResult)[]> {
-    const data = await get<TMDBSearchResult>("search/multi", {
-      query,
-      include_adult: false,
-      language: "en-US",
-      page: 1,
-    });
-    // filter out results that aren't movies or shows
-    const results = data.results.filter(
-      (r) =>
-        r.media_type === TMDBContentTypes.MOVIE ||
-        r.media_type === TMDBContentTypes.TV,
-    );
-    return results;
-  }
+export async function multiSearch(
+  query: string,
+): Promise<(TMDBMovieSearchResult | TMDBShowSearchResult)[]> {
+  const data = await get<TMDBSearchResult>("search/multi", {
+    query,
+    include_adult: false,
+    language: "en-US",
+    page: 1,
+  });
+  // filter out results that aren't movies or shows
+  const results = data.results.filter(
+    (r) =>
+      r.media_type === TMDBContentTypes.MOVIE ||
+      r.media_type === TMDBContentTypes.TV,
+  );
+  return results;
+}
 
 export async function getTrending(
   pageNumber: number,
@@ -183,7 +183,7 @@ export async function getTrending(
   // await new Promise(resolve => setTimeout(resolve, 3000)); //articially adding delay to test DiscoverLoadingPart
 
   const data = await get<TMDBSearchResult>("trending/all/day", {
-    language: 'en-US',
+    language: "en-US",
     page: pageNumber,
   });
 
@@ -193,7 +193,7 @@ export async function getTrending(
       r.media_type === TMDBContentTypes.TV,
   );
 
-  return results
+  return results;
 }
 
 export async function generateQuickSearchMediaUrl(

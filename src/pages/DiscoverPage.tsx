@@ -1,21 +1,22 @@
+import { t } from "i18next";
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
+import InfiniteScroll from "react-infinite-scroller";
 import { useAsyncFn } from "react-use";
 
-import { WideContainer } from "@/components/layout/WideContainer";
-import { Title } from "@/components/text/Title";
-import { DiscoverLoadingPart } from "@/pages/parts/discover/DiscoverLoadingPart";
-import { MediaGrid } from "@/components/media/MediaGrid";
-import { WatchedMediaCard } from "@/components/media/WatchedMediaCard";
-import { t } from "i18next";
-import { SubPageLayout } from "./layouts/SubPageLayout";
 import { getTrendingMedia } from "@/backend/metadata/discover";
 import {
   TMDBMovieSearchResult,
   TMDBShowSearchResult,
 } from "@/backend/metadata/types/tmdb";
+import { WideContainer } from "@/components/layout/WideContainer";
+import { MediaGrid } from "@/components/media/MediaGrid";
+import { WatchedMediaCard } from "@/components/media/WatchedMediaCard";
+import { Title } from "@/components/text/Title";
+import { DiscoverLoadingPart } from "@/pages/parts/discover/DiscoverLoadingPart";
 import { MediaItem } from "@/utils/mediaTypes";
-import InfiniteScroll from "react-infinite-scroller";
+
+import { SubPageLayout } from "./layouts/SubPageLayout";
 
 interface TrendingViewProps {
   state: {
@@ -26,12 +27,17 @@ interface TrendingViewProps {
   hasMore: boolean;
 }
 
-function TrendingView({ state, trendingData, loadMore, hasMore }: TrendingViewProps) {
+function TrendingView({
+  state,
+  trendingData,
+  loadMore,
+  hasMore,
+}: TrendingViewProps) {
   if (state.loading) {
     return <DiscoverLoadingPart />;
-  } else {
-    return (
-      <div className="mt-8">
+  }
+  return (
+    <div className="mt-8">
       <MediaGrid>
         {trendingData.map((v) => (
           <WatchedMediaCard key={v.id.toString()} media={v} />
@@ -42,13 +48,10 @@ function TrendingView({ state, trendingData, loadMore, hasMore }: TrendingViewPr
         pageStart={2}
         loadMore={loadMore}
         hasMore={hasMore}
-        loader={
-          <DiscoverLoadingPart/>
-        }
+        loader={<DiscoverLoadingPart />}
       />
     </div>
-    );
-  }
+  );
 }
 
 export function DiscoverPage() {
@@ -61,10 +64,13 @@ export function DiscoverPage() {
     try {
       const additionalResults = await getTrendingMedia(currentPageNumber + 1);
       if (additionalResults && additionalResults.length > 0) {
-        setTrendingResults((prevResults) => [...prevResults, ...additionalResults]);
+        setTrendingResults((prevResults) => [
+          ...prevResults,
+          ...additionalResults,
+        ]);
         setCurrentPageNumber((prevPageNumber) => prevPageNumber + 1);
       } else {
-        setHasMore(false); 
+        setHasMore(false);
       }
     } catch (error) {
       console.error(error);
@@ -97,7 +103,12 @@ export function DiscoverPage() {
       <WideContainer>
         <Title>{t("discover.title")}</Title>
 
-        <TrendingView state={state} trendingData={trendingResults} loadMore={loadMore} hasMore={hasMore} />
+        <TrendingView
+          state={state}
+          trendingData={trendingResults}
+          loadMore={loadMore}
+          hasMore={hasMore}
+        />
       </WideContainer>
     </SubPageLayout>
   );
