@@ -141,12 +141,12 @@ export function decodeTMDBId(
   };
 }
 
-  const baseURL = "https://api.themoviedb.org/3";
+const baseURL = "https://api.themoviedb.org/3";
 
-  const headers = {
-    accept: "application/json",
-    Authorization: `Bearer ${conf().TMDB_READ_API_KEY}`,
-  };
+const headers = {
+  accept: "application/json",
+  Authorization: `Bearer ${conf().TMDB_READ_API_KEY}`,
+};
 
 async function get<T>(url: string, params?: object): Promise<T> {
   const res = await mwFetch<any>(encodeURI(url), {
@@ -185,7 +185,7 @@ export async function getTrending(
   // await new Promise(resolve => setTimeout(resolve, 3000)); //articially adding delay to test DiscoverLoadingPart
 
   const data = await get<TMDBSearchResult>("trending/all/day", {
-    language: 'en-US',
+    language: "en-US",
     page: pageNumber,
   });
 
@@ -195,7 +195,7 @@ export async function getTrending(
       r.media_type === TMDBContentTypes.TV,
   );
 
-  return results
+  return results;
 }
 
 export async function generateQuickSearchMediaUrl(

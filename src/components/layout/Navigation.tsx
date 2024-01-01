@@ -113,7 +113,6 @@ export function Navigation(props: NavigationProps) {
           </div>
         </div>
       </div>
-
     </>
   );
 }
