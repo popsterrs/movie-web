@@ -28,5 +28,8 @@ package-lock.json
 
 # config
 .env
+<<<<<<< HEAD
 # public/config.js
 devEnvironmnet.env
+=======
+>>>>>>> parent of 088808a (prettier)
