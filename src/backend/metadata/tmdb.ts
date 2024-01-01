@@ -156,6 +156,7 @@ async function get<T>(url: string, params?: object): Promise<T> {
       ...params,
     },
   });
+
   return res;
 }
 
@@ -168,6 +169,7 @@ export async function multiSearch(
     language: "en-US",
     page: 1,
   });
+
   // filter out results that aren't movies or shows
   const results = data.results.filter(
     (r) =>
