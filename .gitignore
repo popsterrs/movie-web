@@ -29,7 +29,13 @@ package-lock.json
 # config
 .env
 <<<<<<< HEAD
+<<<<<<< HEAD
 # public/config.js
 devEnvironmnet.env
 =======
 >>>>>>> parent of 088808a (prettier)
+=======
+config.js
+public/config.js
+devEnvironmnet.env
+>>>>>>> parent of 00dfb02 (readd config.js)
