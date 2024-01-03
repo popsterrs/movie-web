@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 import { NoUserAvatar, UserAvatar } from "@/components/Avatar";
@@ -12,7 +13,7 @@ import { conf } from "@/setup/config";
 import { useBannerSize } from "@/stores/banner";
 
 import { BrandPill } from "./BrandPill";
-import { TextPill } from "./TextPill";
+import { CardPill } from "./CardPill";
 
 export interface NavigationProps {
   bg?: boolean;
@@ -23,6 +24,7 @@ export interface NavigationProps {
 export function Navigation(props: NavigationProps) {
   const bannerHeight = useBannerSize();
   const { loggedIn } = useAuth();
+  const { t } = useTranslation();
 
   return (
     <>
@@ -73,13 +75,13 @@ export function Navigation(props: NavigationProps) {
 
       {/* content */}
       <div
-        className="fixed pointer-events-none left-0 right-0 z-[60] top-0 min-h-[150px]"
+        className="fixed pointer-events-none left-0 right-0 z-[60] top-0 min-h-[150px] flex items-center"
         style={{
           top: `${bannerHeight}px`,
         }}
       >
         <div className={classNames("fixed left-0 right-0 flex items-center")}>
-          <div className="px-7 py-5 relative z-[60] flex flex-1 items-center justify-between">
+          <div className="px-7 py-5 relative z-[60] flex flex-1 justify-between items-center">
             <div className="flex items-center space-x-1.5 ssm:space-x-3 pointer-events-auto">
               <Link
                 className="block tabbable rounded-full text-xs ssm:text-base"
@@ -111,6 +113,31 @@ export function Navigation(props: NavigationProps) {
               </LinksDropdown>
             </div>
           </div>
+        </div>
+
+        <div className="fixed pointer-events-none -translate-x-2/4 left-1/2">
+          <CardPill clickable hideCardOnMobile>
+            <a
+              href="/"
+              target="_blank"
+              rel="noreferrer"
+              className="text-xl text-white tabbable rounded-full"
+            >
+              <span className="font-medium text-base text-white">
+                {t("navigation.menu.home")}
+              </span>
+            </a>
+            <a
+              href="/discover"
+              target="_blank"
+              rel="noreferrer"
+              className="text-xl text-white tabbable rounded-full"
+            >
+              <span className="font-medium text-base text-white">
+                {t("navigation.menu.discover")}
+              </span>
+            </a>
+          </CardPill>
         </div>
       </div>
     </>
