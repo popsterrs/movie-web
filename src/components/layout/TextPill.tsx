@@ -7,6 +7,7 @@ export function TextPill(props: {
   hideTextOnMobile?: boolean;
   hideButtonOnMobile?: boolean;
   backgroundClass?: string;
+  children: React.ReactNode;
 }) {
   const { t } = useTranslation();
 
@@ -28,6 +29,7 @@ export function TextPill(props: {
         ].join(" ")}
       >
         {t(props.text ? props.text : "")}
+        {props.children}
       </span>
     </div>
   );
