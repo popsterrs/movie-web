@@ -2,7 +2,6 @@ import classNames from "classnames";
 
 export function CardPill(props: {
   clickable?: boolean;
-  text?: string;
   hideCardOnMobile?: boolean;
   backgroundClass?: string;
   children: React.ReactNode;

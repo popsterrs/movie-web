@@ -51,7 +51,7 @@ export function Navigation(props: NavigationProps) {
       >
         <div
           className={classNames(
-            "fixed left-0 right-0 h-20 flex items-center",
+            "fixed left-0 right-0 h-32 flex items-center",
             props.doBackground
               ? "bg-background-main border-b border-utils-divider border-opacity-50"
               : null,
@@ -62,7 +62,7 @@ export function Navigation(props: NavigationProps) {
               <BlurEllipsis positionClass="absolute" />
             </div>
           ) : null}
-          <div className="opacity-0 absolute inset-0 block h-20 pointer-events-auto" />
+          <div className="opacity-0 absolute inset-0 block h-32 pointer-events-auto" />
           <div
             className={`${
               props.bg ? "opacity-100" : "opacity-0"
