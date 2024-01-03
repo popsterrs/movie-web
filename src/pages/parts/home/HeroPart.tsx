@@ -40,7 +40,7 @@ export function HeroPart({ setIsSticky, searchParams }: HeroPartProps) {
 
   const { width: windowWidth } = useWindowSize();
 
-  const topSpacing = 16;
+  const topSpacing = 72;
   const [stickyOffset, setStickyOffset] = useState(topSpacing);
   useEffect(() => {
     if (windowWidth > 1200) {
